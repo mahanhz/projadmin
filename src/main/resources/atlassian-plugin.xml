@@ -1,24 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
-    </plugin-info>
-
-    <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="projadmin"/>
-    
-    <!-- add our web resources -->
-    <web-resource key="projadmin-resources" name="projadmin Web Resources">
-        <dependency>com.atlassian.auiplugin:ajs</dependency>
-        
-        <resource type="download" name="projadmin.css" location="/css/projadmin.css"/>
-        <resource type="download" name="projadmin.js" location="/js/projadmin.js"/>
-        <resource type="download" name="images/" location="/images"/>
-
-        <context>projadmin</context>
-    </web-resource>
-    
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="projadmin"/>
+  <!-- add our web resources -->
+  <web-resource key="projadmin-resources" name="projadmin Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="projadmin.css" location="/css/projadmin.css"/>
+    <resource type="download" name="projadmin.js" location="/js/projadmin.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>projadmin</context>
+  </web-resource>
+  <web-item name="Shortcut to project admin"
+            i18n-name-key="to-project-admin.name"
+            key="to-project-admin"
+            section="browse_link/project_history_main"
+            weight="1000">
+    <description key="to-project-admin.description">Shortcut to project admin</description>
+    <label key="to-project-admin.label"></label>
+    <link linkId="to-project-admin-link">/secure/project/ViewProjects.jspa</link>
+    <condition class="com.example.projadmin.UserLoggedInCondition2" />
+    <condition class="com.example.projadmin.UserIsAdminCondition2" />
+    <condition class="com.example.projadmin.UserHasMoreThanOneRecentProjects" />
+  </web-item>
 </atlassian-plugin>
